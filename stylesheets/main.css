@@ -11,10 +11,9 @@
   --ff-primary: 'Montserrat', sans-serif;;
   --ff-secondary: 'Fraunces', serif;;
   --fs-p: 14px;
-  --fs-h1: calc(var(--fs-p) * 2);
+  --fs-h1: 32px;
   --fs-h2: 12px;
-  --fs-btn: calc(var(--fs-p) * .80);
-  --fs-footer: calc(var(--fs-p) * .85);
+  --fs-btn: 14px;
   --fw-normal: 500;
   --fw-bold: 700; 
   /* COLOR */
@@ -25,12 +24,11 @@
   --color-h2: hsl(228, 12%, 48%);
   --color-current-price: hsl(158, 36%, 37%);
   --color-btn-bg: hsl(158, 36%, 37%);
-  --color-btn-border: hsl(158, 36%, 37%);
   --color-btn-txt: white;
-  --color-active-bg: rgba(112, 128, 144, 0.25);
+  --color-btn-hover: #1A4031;
+  --color-a: hsl(158, 36%, 37%);
   /* LAYOUT */
   --white-space: 25px;
-  --white-space-extended: clamp(50px, 5vw, 100px);
 }
 
 /* <===== GLOBAL STYLES =====> */
@@ -68,12 +66,6 @@ a {
   text-decoration: none;
 }
 
-
-
-.btn-wrapper {
-  text-align: center;
-}
-
 .btn {
   display: block;
   width: 100%;
@@ -82,18 +74,20 @@ a {
   font-size: var(--fs-btn);
   text-transform: capitalize;
   padding: 1rem 2rem;
-  border: 2px solid var(--color-btn-border);
+  border: none;
   border-radius: 7.5px;
   transition: .3s;
   text-align: center;
+  cursor: pointer;
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-primary);
 }
 
 .btn:hover {
-
-} 
-
-.img-mobile {
-  border-radius: 10px 10px 0 0;
+  background-color: var(--color-btn-hover) ;
 }
 
 /* <===== BODY =====> */
@@ -106,18 +100,22 @@ body {
 }
 
 main {
-  min-height: 95vh;
-  margin: 0 auto;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
+  min-height: 90vh;
 }
 
 .card {
-  max-width: 600px;
+  margin: 0 auto;  /* Centers the card */
+  max-width: 375px;
   background-color: var(--color-card-bg);
   border-radius: 10px;
+}
+
+.img-mobile {
+  border-radius: 10px 10px 0 0;  /* Adds border to top left & right corner */
+}
+
+.img-desktop {
+  display: none;
 }
 
 .description-container {
@@ -129,8 +127,12 @@ main {
   text-transform: uppercase;
 }
 
+.icon-cart {
+  margin-right: 10px;
+}
+
 .price-container {
-  padding: var(--white-space) 0;
+  padding: var(--white-space) 0;  /* Adds white space to top & bottom */
 }
 
 .current-price {
@@ -141,6 +143,53 @@ main {
 }
 
 .previous-price {
-  margin-left: 10px;
+  margin-left: 20px;
   text-decoration: line-through;
+}
+
+/* <===== FOOTER =====> */
+
+.attribution { 
+  font-size: 12px; 
+  text-align: center; 
+}
+
+.attribution a { 
+  color: var(--color-a); 
+}
+
+.attribution a:hover {
+  color: var(--color-btn-hover);
+  font-weight: var(--fw-bold);
+}
+
+/* <===== MEDIA QUERY =====> */
+@media screen and (min-width: 769px) {
+  main {
+    display: flex;
+    align-items: center;
+    /* Centers the card vertically */
+  }
+
+  .card {
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Sets image & description side by side  */
+  }
+
+  .img-container, .description-container {
+    flex-basis: 50%;
+  }
+
+  .img-mobile {
+    display: none;
+  }
+  
+  .img-desktop {
+    display: block;
+    border-radius: 10px 0 0 10px; /* Adds border radius to top left and bottom left corner */
+    object-fit: cover;  /* Clips the image according to the aspect ratio */
+  }
 }
